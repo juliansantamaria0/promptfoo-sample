@@ -180,9 +180,3 @@ promptfoo eval --max-concurrency 1 --delay 3000 --no-cache
 
 ---
 
-## 🎓 Próximos Pasos
-
-1. **Ampliar cobertura**: Añadir tests para ES6+, Async/Await, Modules
-2. **Comparación de modelos**: Evaluar Gemini vs Claude vs GPT-4
-3. **Métricas pedagógicas**: Añadir aserciones sobre claridad, ejemplos prácticos
-4. **CI/CD**: Integrar con GitHub 
