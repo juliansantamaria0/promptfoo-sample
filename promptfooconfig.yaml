@@ -1,0 +1,237 @@
+description: "Evaluación de Prompts - Docente JavaScript Junior (30 Casos)"
+
+# 1. PROMPT BASE (Incluye la Instrucción y el Contexto General)
+prompts:
+  - |
+    Vas a actuar como un docente de programación para estudiantes de 17-24 años con enfoque en JavaScript, donde mi manera de pregunta y respuesta será explicando varios conceptos que no entiendo.
+
+    **Contexto General:** Soy un estudiante de programación, donde actualmente me estoy enfocando en el lenguaje de JavaScript, especialmente Vanilla.
+    **Formato de Salida:** Me responderás con una explicación pedagógica a nivel de caso de estudio, mezclando explicación teórica, ejemplos codificables, y texto argumentativo. La respuesta debe hacer lineal el código que se genera.
+
+    **PREGUNTA ESPECÍFICA:** {{question}}
+
+# 2. PROVEEDORES
+providers:
+  - id: google:gemini-2.5-flash
+    config:
+      apiKey: AIzaSyCoutJO-nWinkSv17GD2wo8rYtUJTpEgW4
+
+# 3. CASOS DE PRUEBA (30 Tests)
+tests:
+# PROMPT 1: Hoisting 
+  - vars:
+      question: Explícame, paso a paso, cómo funciona el `hoisting` en JavaScript usando ejemplos sencillos.
+    assert:
+      - type: icontains
+        value: eleva
+      - type: icontains
+        value: var
+
+  # PROMPT 2: var, let, const
+  - vars:
+      question: Ayúdame a entender la diferencia entre `var`, `let` y `const`. Dame ejemplos y dime cuándo debería usar cada uno.
+    assert:
+      - type: icontains
+        value: scope de bloque
+
+  # PROMPT 3: Error con let y hoisting
+# PROMPT 3
+  - vars:
+      question: ¿Por qué el siguiente código en JavaScript da error y cómo podría corregirse?
+    assert:
+      - type: icontains
+        value: Dead Zone # O 'zona muerta'
+      - type: icontains
+        value: antes de inicializar # Explicación alternativa
+
+  # PROMPT 4: Scope
+  - vars:
+      question: Quiero entender qué es el 'scope' en JavaScript. Explícalo usando ejemplos de funciones y bloques.
+    assert:
+      - type: icontains
+        value: global
+
+  # PROMPT 5: Funciones Flecha
+  - vars:
+      question: Explícame qué es una función flecha y compárala con una función tradicional. Dame casos de uso.
+    assert:
+      - type: icontains
+        value: this
+
+
+# PROMPT 6
+  - vars:
+      question: ¿Qué hace el método `.map()` en JavaScript? Dame un ejemplo práctico con un arreglo de números.
+    assert:
+      - type: icontains
+        value: nuevo array # O 'transforma' y 'nuevo'
+  # PROMPT 7: Callbacks
+  - vars:
+      question: Dame una explicación clara de qué son los callbacks en JavaScript y muéstrame cómo crear uno.
+    assert:
+      - type: icontains
+        value: argumento
+
+  # PROMPT 8: Promesas y Asincronismo
+  - vars:
+      question: Explícame paso a paso cómo funciona el asincronismo en JavaScript usando promesas.
+    assert:
+      - type: icontains
+        value: resolve
+
+ # PROMPT 9
+  - vars:
+      question: Tengo una función que no está devolviendo el valor esperado, ¿puedes explicarme por qué y cómo puedo corregirla?
+    assert:
+      - type: llm-rubric
+        value: "La respuesta debe identificar que el problema es la sentencia 'return' y el punto y coma implícito/explícito que detiene la ejecución."
+
+  # PROMPT 10: DOM
+  - vars:
+      question: Enséñame qué es el DOM en JavaScript y dame un ejemplo básico para cambiar el texto de un elemento HTML.
+    assert:
+      - type: icontains
+        value: document.getElementById
+
+  # PROMPT 11: == vs ===
+  - vars:
+      question: Dime cuál es la diferencia entre `==` y `===` en JavaScript y dame ejemplos simples.
+    assert:
+      - type: icontains
+        value: tipo de dato
+
+  # PROMPT 12: Objetos (Añadir/Eliminar)
+  - vars:
+      question: Explícame qué es un objeto en JavaScript y cómo puedo añadir y eliminar propiedades.
+    assert:
+      - type: icontains
+        value: delete
+
+  # PROMPT 13: filter, map, reduce
+  - vars:
+      question: Quiero entender qué son los métodos `.filter()`, `.map()` y `.reduce()`. Compáralos.
+    assert:
+      - type: icontains
+        value: acumulador
+
+  # PROMPT 14: try...catch
+  - vars:
+      question: Explícame cómo funciona `try...catch` en JavaScript con un ejemplo donde haya un error real.
+    assert:
+      - type: icontains
+        value: throw
+
+  # PROMPT 15: API y fetch()
+  - vars:
+      question: Dame una analogía sencilla para entender qué es una API y cómo se consume desde JavaScript con `fetch()`.
+    assert:
+      - type: icontains
+        value: JSON
+   
+  # PROMPT 16: JSON.stringify/parse
+  - vars:
+      question: Explícame qué es JSON y muéstrame cómo convertir un objeto a JSON y viceversa.
+    assert:
+      - type: icontains
+        value: stringify
+
+  # PROMPT 17: Interpretado y Single-threaded
+  - vars:
+      question: ¿Qué significa que JavaScript sea un lenguaje interpretado y de un solo hilo? Dame una explicación para principiantes.
+    assert:
+      - type: icontains
+        value: Event Loop
+
+  # PROMPT 18: Clases y new
+  - vars:
+      question: Enséñame cómo crear una clase en JavaScript y cómo instanciarla con `new`.
+    assert:
+      - type: icontains
+        value: constructor
+
+  # PROMPT 19: this
+  - vars:
+      question: Explícame qué es `this` en JavaScript con ejemplos donde cambie su valor.
+    assert:
+      - type: icontains
+        value: función flecha
+
+  # PROMPT 20: localStorage
+  - vars:
+      question: Quiero aprender a usar `localStorage`. Explícame cómo guardar, obtener y borrar datos.
+    assert:
+      - type: icontains
+        value: setItem
+
+
+# PROMPT 21
+  - vars:
+      question: ¿Por qué este código da el mismo resultado en todas las funciones? Explícame cómo puedo evitar esto usando `let`.
+    assert:
+      - type: icontains
+        value: scope global # O 'ámbito de función' o 'alcance global'
+
+  # PROMPT 22: async/await
+  - vars:
+      question: Enséñame cómo usar `async` y `await` con un ejemplo sencillo que haga un `fetch` a una API pública.
+    assert:
+      - type: icontains
+        value: await fetch
+
+  # PROMPT 23: Módulos (import/export)
+  - vars:
+      question: Explícame qué son los módulos en JavaScript y cómo funcionan `import` y `export` con ejemplos.
+    assert:
+      - type: icontains
+        value: type="module"
+
+# PROMPT 24
+  - vars:
+      question: No entiendo qué es un 'event loop'. Explícamelo con palabras simples y un diagrama pequeño.
+    assert:
+      - type: icontains
+        value: cola # Que mencione alguna 'cola' de tareas
+      - type: icontains
+        value: asíncrono # Que mencione la gestión asíncrona
+
+  # PROMPT 25: Array .sort()
+  - vars:
+      question: Tengo un arreglo de objetos y quiero ordenarlo por un valor numérico. Enséñame cómo usar `.sort()`.
+    assert:
+      - type: icontains
+        value: a - b
+
+  # PROMPT 26: Event Listener (Botón)
+  - vars:
+      question: Muéstrame cómo crear un botón en HTML que ejecute una función de JavaScript al hacer clic.
+    assert:
+      - type: icontains
+        value: addEventListener
+
+  # PROMPT 27: Eventos de Mouse, Teclado, Formulario
+  - vars:
+      question: Enséñame a detectar eventos de teclado, mouse y cambios en formularios usando JavaScript.
+    assert:
+      - type: icontains
+        value: keydown
+
+  # PROMPT 28: setTimeout/setInterval
+  - vars:
+      question: Quiero aprender a usar `setTimeout` y `setInterval`. Dame ejemplos prácticos con explicaciones.
+    assert:
+      - type: icontains
+        value: clearInterval
+
+  # PROMPT 29: Desestructuración
+  - vars:
+      question: Explícame cómo funciona la desestructuración de objetos y arreglos en JavaScript con ejemplos claros.
+    assert:
+      - type: icontains
+        value: ...resto
+
+  # PROMPT 30: Validación de Formulario (Nombre y Correo)
+  - vars:
+      question: Enséñame a validar un formulario simple en JavaScript (nombre y correo). Dame el código paso a paso.
+    assert:
+      - type: icontains
+        value: e.preventDefault
